@@ -1,0 +1,13 @@
+name: jpgrid-app
+title: jpgrid-app
+username:
+account: uchidamizuki
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8040141
+bundleId: 6735801
+url: https://uchidamizuki.shinyapps.io/jpgrid-app/
+when: 1673792341.51836
+lastSyncTime: 1673792341.51837
+asMultiple: FALSE
+asStatic: FALSE
