@@ -1,6 +1,4 @@
-# https://stackoverflow.com/questions/41440016/shinydasboard-not-loading-r
 source("utils.R")
-source("data.R")
 
 # UI ----------------------------------------------------------------------
 
@@ -8,136 +6,143 @@ header <- dashboardHeader(title = "jpgrid App")
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
-    menuItem("市区町村別メッシュ取得",
-             tabName = "tab_grid_city2015",
+    menuItem("市区町村別のメッシュ生成",
+             tabName = "tab_grid_city",
              icon = icon("tree-city")),
-    menuItem("緯度経度からメッシュに変換",
-             tabName = "tab_XY_to_grid",
-             icon = icon("location-pin")),
-    menuItem("メッシュから中心点に変換",
-             tabName = "tab_grid_to_XY",
-             icon = icon("border-all"))
+    menuItem("文字列からメッシュ生成",
+             tabName = "tab_parse_grid",
+             icon = icon("hashtag")),
+    menuItem("緯度経度からメッシュ生成",
+             tabName = "tab_coords_to_grid",
+             icon = icon("location-pin"))
   )
 )
 
 body <- dashboardBody(
   tabItems(
     tabItem(
-      tabName = "tab_grid_city2015",
+      tabName = "tab_grid_city",
       fluidRow(
         column(
           width = 4,
           box(
+            title = "データ選択",
             width = 12,
-            shinyWidgets::pickerInput("select_grid_city2015_pref_code",
+            shinyWidgets::pickerInput("select_grid_city_pref_code",
                                       "都道府県",
-                                      choices = data_grid_city2015_pref$pref_code |>
-                                        set_names(data_grid_city2015_pref$pref_name_ja),
+                                      choices = data_pref$pref_code |>
+                                        set_names(data_pref$pref_name_ja),
                                       multiple = TRUE),
-            uiOutput("select_grid_city2015_city_code"),
-            uiOutput("select_grid_city2015_grid_size"),
-            shinyWidgets::radioGroupButtons("select_grid_city2015_grid_size",
+            uiOutput("select_grid_city_city_code"),
+            uiOutput("select_grid_city_grid_size"),
+            shinyWidgets::radioGroupButtons("select_grid_city_grid_size",
                                             "メッシュサイズ",
                                             choices = c("1km", "10km", "80km"),
                                             justified = TRUE),
-            shinyWidgets::actionBttn("display_grid_city2015",
+            shinyWidgets::actionBttn("display_grid_city",
                                      "メッシュ表示",
                                      style = "material-flat",
                                      icon = icon("map"))
           ),
           box(
+            title = "データダウンロード",
             width = 12,
-            shinyWidgets::radioGroupButtons("select_grid_city2015_ext",
+            shinyWidgets::radioGroupButtons("select_grid_city_ext",
                                             "データ形式",
-                                            choices = c("csv", "gpkg"),
+                                            choices = c("gpkg", "csv"),
                                             justified = TRUE),
-            shinyWidgets::downloadBttn("download_grid_city2015",
+            shinyWidgets::downloadBttn("download_grid_city",
                                        "ダウンロード",
                                        style = "material-flat")
           )
         ),
         box(
           width = 8,
-          leafletOutput("leaflet_grid_city2015",
+          leafletOutput("leaflet_grid_city",
                         height = 800)
         )
       )
     ),
     tabItem(
-      tabName = "tab_XY_to_grid",
+      tabName = "tab_parse_grid",
       fluidRow(
         column(
           width = 4,
           box(
+            title = "データ選択",
             width = 12,
-            fileInput("file_XY_to_grid",
-                      "緯度経度データの選択"),
-            uiOutput("select_XY_to_grid_X"),
-            uiOutput("select_XY_to_grid_Y"),
-            uiOutput("select_XY_to_grid_name"),
-            shinyWidgets::radioGroupButtons("select_XY_to_grid_grid_size",
-                                            "メッシュサイズ",
-                                            choices = rev(grid_size),
-                                            justified = TRUE),
-            shinyWidgets::actionBttn("display_XY_to_grid",
-                                     "データ変換",
+            fileInput("file_parse_grid",
+                      "メッシュデータの選択"),
+            uiOutput("select_parse_grid_col_grid"),
+            uiOutput("select_parse_grid_col_id"),
+            shinyWidgets::materialSwitch("select_parse_grid_grid_size_auto",
+                                         "メッシュサイズの自動判定",
+                                         value = TRUE),
+            uiOutput("select_parse_grid_grid_size"),
+            shinyWidgets::actionBttn("display_parse_grid",
+                                     "メッシュ表示",
                                      style = "material-flat",
                                      icon = icon("map"))
           ),
           box(
+            title = "データダウンロード",
             width = 12,
-            shinyWidgets::radioGroupButtons("select_XY_to_grid_ext",
+            shinyWidgets::radioGroupButtons("select_parse_grid_ext",
                                             "データ形式",
-                                            choices = c("csv", "gpkg"),
+                                            choices = c("gpkg", "csv"),
                                             justified = TRUE),
-            shinyWidgets::downloadBttn("download_XY_to_grid",
+            shinyWidgets::downloadBttn("download_parse_grid",
                                        "ダウンロード",
                                        style = "material-flat")
           )
         ),
         box(
           width = 8,
-          leafletOutput("leaflet_XY_to_grid",
+          leafletOutput("leaflet_parse_grid",
                         height = 800)
         )
-      ),
+      )
     ),
     tabItem(
-      tabName = "tab_grid_to_XY",
+      tabName = "tab_coords_to_grid",
       fluidRow(
         column(
           width = 4,
           box(
+            title = "データ選択",
             width = 12,
-            fileInput("file_grid_to_XY",
+            fileInput("file_coords_to_grid",
                       "メッシュデータの選択"),
-            uiOutput("select_grid_to_XY_grid"),
-            shinyWidgets::radioGroupButtons("select_grid_to_XY_grid_size",
+            uiOutput("select_coords_to_grid_col_X"),
+            uiOutput("select_coords_to_grid_col_Y"),
+            uiOutput("select_coords_to_grid_col_id"),
+            shinyWidgets::radioGroupButtons("select_coords_to_grid_grid_size",
                                             "メッシュサイズ",
-                                            choices = rev(grid_size),
+                                            choices = grid_size,
                                             justified = TRUE),
-            shinyWidgets::actionBttn("display_grid_to_XY",
-                                     "データ変換",
+            shinyWidgets::actionBttn("display_coords_to_grid",
+                                     "メッシュ表示",
                                      style = "material-flat",
                                      icon = icon("map"))
           ),
           box(
+            title = "データダウンロード",
             width = 12,
-            shinyWidgets::radioGroupButtons("select_grid_to_XY_ext",
+            shinyWidgets::radioGroupButtons("select_coords_to_grid_ext",
                                             "データ形式",
-                                            choices = c("csv", "gpkg"),
+                                            choices = c("gpkg", "csv"),
                                             justified = TRUE),
-            shinyWidgets::downloadBttn("download_grid_to_XY",
+            shinyWidgets::downloadBttn("download_coords_to_grid",
                                        "ダウンロード",
                                        style = "material-flat")
           )
         ),
         box(
           width = 8,
-          leafletOutput("leaflet_grid_to_XY",
+          leafletOutput("leaflet_coords_to_grid",
                         height = 800)
         )
-      ),
+      )
     )
   )
 )
@@ -146,4 +151,5 @@ ui <- dashboardPage(
   header = header,
   sidebar = sidebar,
   body = body,
+  skin = "midnight"
 )

@@ -1,12 +1,12 @@
+source("utils.R")
+source("server/server-grid_city.R")
+source("server/server-parse_grid.R")
+source("server/server-coords_to_grid.R")
 
 # server ------------------------------------------------------------------
 
-source("server/server_XY_to_grid.R")
-source("server/server_grid_to_XY.R")
-source("server/server_grid_city2015.R")
-
 server <- function(input, output, session) {
-  server_grid_city2015(input, output, session)
-  server_XY_to_grid(input, output, session)
-  server_grid_to_XY(input, output, session)
+  server_grid_city(input, output, session)
+  server_parse_grid(input, output, session)
+  server_coords_to_grid(input, output, session)
 }
