@@ -18,8 +18,7 @@ library(zip)
 
 library(jpgrid)
 
-# utils -------------------------------------------------------------------
+# global ------------------------------------------------------------------
 
-source("utils/utils-data.R")
-source("utils/utils-shiny.R")
-source("utils/utils-grid.R")
+source("global/global-grid.R")
+source("global/global-shiny.R")

@@ -1,5 +1,19 @@
 
-# utils-shiny -------------------------------------------------------------
+# global-shiny ------------------------------------------------------------
+
+href_jpgrid <- "https://uchidamizuki.github.io/jpgrid/"
+
+icon_tab_about <- icon("circle-info")
+icon_tab_grid_city <- icon("tree-city")
+icon_tab_parse_grid <- icon("hashtag")
+icon_tab_coords_to_grid <- icon("location-pin")
+
+text_tab_about <- "このアプリについて"
+text_tab_grid_city <- "市区町村別のメッシュ生成"
+text_tab_parse_grid <- "文字列からメッシュ生成"
+text_tab_coords_to_grid <- "緯度経度からメッシュ生成"
+
+style_button <- "simple"
 
 # html
 a_blank <- partial(a,

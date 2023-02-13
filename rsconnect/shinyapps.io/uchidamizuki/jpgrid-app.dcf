@@ -5,10 +5,10 @@ account: uchidamizuki
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8040141
-bundleId: 6836826
+bundleId: 6840945
 url: https://uchidamizuki.shinyapps.io/jpgrid-app/
-when: 1676177977.49752
-lastSyncTime: 1676177977.49754
+when: 1676300863.48195
+lastSyncTime: 1676300863.48196
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: README.md|README.qmd

@@ -1,10 +1,11 @@
-source("utils.R")
+source("global.R")
+
+# server ------------------------------------------------------------------
+
 source("server/server-about.R")
 source("server/server-grid_city.R")
 source("server/server-parse_grid.R")
 source("server/server-coords_to_grid.R")
-
-# server ------------------------------------------------------------------
 
 server <- function(input, output, session) {
   server_about(input, output, session)
