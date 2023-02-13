@@ -21,5 +21,5 @@ library(jpgrid)
 # utils -------------------------------------------------------------------
 
 source("utils/utils-data.R")
-source("utils/utils-leaflet.R")
+source("utils/utils-shiny.R")
 source("utils/utils-grid.R")

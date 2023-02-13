@@ -1,6 +1,12 @@
 
-# utils-leaflet -----------------------------------------------------------
+# utils-shiny -------------------------------------------------------------
 
+# html
+a_blank <- partial(a,
+                   target="_blank",
+                   rel="noopener noreferrer")
+
+# leaflet
 leafletOptions_grid <- partial(leafletOptions,
                                zoomControl = FALSE)
 
