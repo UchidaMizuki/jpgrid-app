@@ -1,6 +1,7 @@
 jpgrid App
 ================
 
-## URL
+## **このアプリについて**
 
+地域メッシュデータを利用するためのRパッケージである [jpgrid](https://uchidamizuki.github.io/jpgrid/) パッケージの機能の一部を提供しています．
 <https://uchidamizuki.shinyapps.io/jpgrid-app/>
