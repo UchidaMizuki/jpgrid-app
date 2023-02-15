@@ -7,7 +7,8 @@ source("ui/ui-grid_city.R")
 source("ui/ui-parse_grid.R")
 source("ui/ui-coords_to_grid.R")
 
-header <- dashboardHeader(title = "jpgrid App")
+header <- dashboardHeader(title = a(href = "https://github.com/UchidaMizuki/jpgrid-app",
+                                    "jpgrid App"))
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
